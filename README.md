@@ -90,8 +90,6 @@ HAVING AVG(age) < 30;
 
 * *MySQL*
 * *MySQL Workbench*
-* *Git*
-* *GitHub*
 
 ## 🎯 Learning Objectives
 
