@@ -1,1 +1,342 @@
+# 🛒 E-Commerce Customer Churn Analysis – MySQL
+
+## 📌 Project Overview
+
+This project focuses on analyzing **customer churn in an e-commerce business using MySQL**.
+
+The project includes database creation, data cleaning, missing-value treatment, data standardization, customer churn analysis, aggregation, filtering, subqueries, and table joins.
+
+The main objective is to understand **customer behavior and factors associated with customer churn**, while practicing real-world SQL data analysis techniques.
+
+---
+
+## 🎯 Objectives
+
+* Analyze customer churn and active customer patterns
+* Clean and standardize customer data
+* Handle missing values using mean and mode imputation
+* Identify customer behavior based on tenure, payment mode, complaints, and orders
+* Analyze churned customers and their characteristics
+* Perform customer segmentation using warehouse-to-home distance
+* Analyze customer returns
+* Practice SQL joins, subqueries, aggregate functions, and conditional logic
+
+---
+
+## 🗄️ Database Information
+
+**Database Name:** `ecomm`
+
+**Main Table:** `customer_churn`
+
+The database and customer table are created using MySQL. The `CustomerID` column is defined as the primary key.
+
+### Customer Churn Table
+
+| Column                      | Description                     |
+| --------------------------- | ------------------------------- |
+| CustomerID                  | Unique customer identifier      |
+| Churn                       | Customer churn indicator        |
+| Tenure                      | Customer tenure                 |
+| PreferredLoginDevice        | Preferred login device          |
+| CityTier                    | Customer city tier              |
+| WarehouseToHome             | Distance from warehouse to home |
+| PreferredPaymentMode        | Preferred payment method        |
+| Gender                      | Customer gender                 |
+| HourSpendOnApp              | Hours spent on application      |
+| NumberOfDeviceRegistered    | Number of registered devices    |
+| PreferredOrderCat           | Preferred order category        |
+| SatisfactionScore           | Customer satisfaction score     |
+| MaritalStatus               | Customer marital status         |
+| NumberOfAddress             | Number of customer addresses    |
+| Complain                    | Complaint indicator             |
+| OrderAmountHikeFromlastYear | Increase in order amount        |
+| CouponUsed                  | Number of coupons used          |
+| OrderCount                  | Number of orders                |
+| DaySinceLastOrder           | Days since last order           |
+| CashbackAmount              | Cashback received               |
+
+---
+
+## 🧹 Data Cleaning
+
+Several data-cleaning operations were performed as part of the project.
+
+### 1. Handling Outliers
+
+Rows with `WarehouseToHome` values greater than 100 were removed to handle extreme values.
+
+### 2. Standardizing Login Devices
+
+Different values such as `Phone` were standardized to `Mobile Phone`.
+
+### 3. Standardizing Order Categories
+
+`Mobile` was standardized to `Mobile Phone`.
+
+### 4. Standardizing Payment Modes
+
+Payment mode values such as:
+
+* `COD` → `Cash on Delivery`
+* `CC` → `Credit Card`
+
+were standardized for consistency.
+
+### 5. Renaming Columns
+
+The following columns were renamed for better readability:
+
+* `PreferedOrderCat` → `PreferredOrderCat`
+* `HourSpendOnApp` → `HoursSpentOnApp`
+
+---
+
+## 🔧 Missing Value Treatment
+
+Missing values were handled using different imputation techniques.
+
+### Mean Imputation
+
+Mean values were used for:
+
+* `WarehouseToHome`
+* `HourSpendOnApp`
+* `OrderAmountHikeFromlastYear`
+* `DaySinceLastOrder`
+
+The calculated averages were rounded where required.
+
+### Mode Imputation
+
+Mode values were used for:
+
+* `Tenure`
+* `CouponUsed`
+* `OrderCount`
+
+This approach replaces missing values with the most frequently occurring value in the respective column.
+
+---
+
+## 🔄 Feature Engineering
+
+Two new columns were created to make the data easier to analyze.
+
+### ComplaintReceived
+
+The `Complain` binary field was converted into:
+
+* `Yes` – Customer made a complaint
+* `No` – Customer did not make a complaint
+
+### ChurnStatus
+
+The `Churn` indicator was converted into:
+
+* `Churned`
+* `Active`
+
+---
+
+## 📊 SQL Analysis Performed
+
+The project contains several SQL analysis tasks, including:
+
+### Customer Churn Analysis
+
+* Count of churned and active customers
+* Average tenure of churned customers
+* Total cashback received by churned customers
+* Percentage of churned customers who complained
+* City tier with the highest number of churned customers
+* Churn analysis based on preferred order category
+
+The project calculates the percentage of churned customers who submitted complaints using conditional aggregation.
+
+### Payment Mode Analysis
+
+The most preferred payment mode among active customers was identified using `GROUP BY`, `ORDER BY`, and `LIMIT`.
+
+### Customer Behavior Analysis
+
+The project also analyzes:
+
+* Order amount increase
+* Preferred login device
+* Number of registered devices
+* Coupon usage
+* Customer city tier
+* Marital status
+* Order count
+* Tenure
+
+For example, the average number of registered devices among customers using UPI was calculated using `AVG()`.
+
+---
+
+## 🔍 Advanced SQL Concepts Used
+
+This project demonstrates practical usage of:
+
+* `CREATE DATABASE`
+* `CREATE TABLE`
+* `INSERT`
+* `UPDATE`
+* `DELETE`
+* `ALTER TABLE`
+* `DROP COLUMN`
+* `SELECT`
+* `WHERE`
+* `GROUP BY`
+* `ORDER BY`
+* `LIMIT`
+* `COUNT()`
+* `SUM()`
+* `AVG()`
+* `ROUND()`
+* `CASE`
+* `IF()`
+* Subqueries
+* `LEFT JOIN`
+* Views
+* User-defined functions
+* Data cleaning
+* Data transformation
+* Conditional aggregation
+
+---
+
+## 🔗 Customer Returns Analysis
+
+A separate `customer_returns` table was created containing:
+
+* `ReturnID`
+* `CustomerID`
+* `ReturnDate`
+* `RefundAmount`
+
+The project then joins customer and return information to identify **churned customers who have also made complaints**.
+
+This demonstrates practical usage of SQL `LEFT JOIN` for combining customer and transaction-related information.
+
+---
+
+## 📈 Key Business Questions Explored
+
+Some of the business questions addressed in this project include:
+
+1. How many customers are churned versus active?
+2. What is the average tenure of churned customers?
+3. How much cashback was received by churned customers?
+4. What percentage of churned customers complained?
+5. Which city tier has the highest number of churned customers?
+6. What is the most preferred payment mode among active customers?
+7. Which customers use the highest number of coupons?
+8. What is the average number of devices registered by UPI users?
+9. Which customers have higher-than-average order counts?
+10. Which churned customers have both complaints and returns?
+11. How does customer distance from the warehouse relate to churn?
+12. What customer characteristics may be associated with churn?
+
+---
+
+## 🛠️ Tools & Technologies
+
+* **Database:** MySQL
+* **Language:** SQL
+* **Data Cleaning:** MySQL
+* **Data Analysis:** SQL Queries
+* **Version Control:**  GitHub
+
+---
+
+## 📂 Repository Structure
+
+```text
+E-Commerce-Customer-Churn/
+│
+├── ECommerce_Customer_churn_db.sql
+└── README.md
+```
+
+---
+
+## ▶️ How to Run the Project
+
+### Step 1: Install MySQL
+
+Install MySQL Server and MySQL Workbench.
+
+### Step 2: Open the SQL File
+
+Open:
+
+```text
+ECommerce_Customer_churn_db.sql
+```
+
+in MySQL Workbench.
+
+### Step 3: Execute the Script
+
+Run the SQL script to:
+
+* Create the `ecomm` database
+* Create the `customer_churn` table
+* Insert customer data
+* Clean and transform the data
+* Perform customer churn analysis
+* Create the customer returns table
+* Perform return and churn analysis
+
+The script begins by recreating the `ecomm` database before creating the `customer_churn` table.
+
+---
+
+## 📚 Learning Outcomes
+
+Through this project, I practiced:
+
+* Writing SQL queries for data analysis
+* Cleaning real-world datasets
+* Handling missing values
+* Detecting and handling outliers
+* Standardizing categorical data
+* Creating derived columns
+* Using aggregate functions
+* Writing subqueries
+* Joining multiple tables
+* Creating views and functions
+* Solving business-oriented SQL problems
+* Translating business questions into SQL queries
+
+---
+
+## 🚀 Future Improvements
+
+Possible future enhancements include:
+
+* Build an interactive **Power BI dashboard**
+* Add customer churn KPIs
+* Create churn-rate visualizations
+* Analyze churn by payment mode and order category
+* Analyze churn by distance category
+* Add customer segmentation
+* Perform deeper statistical analysis
+* Develop a churn prediction model using Machine Learning
+
+---
+
+## 👩‍💻 Author
+
+**Siniya V H**
+
+Aspiring Data Analyst | SQL | Excel | Power BI
+
+---
+
+## ⭐ If You Find This Project Useful
+
+If this project helped you learn SQL or customer churn analysis, feel free to **star ⭐ the repository** and explore the SQL queries.
 
